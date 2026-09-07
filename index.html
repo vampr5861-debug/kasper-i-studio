@@ -20,12 +20,12 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 15px;
             position: relative;
             overflow-x: hidden;
         }
 
-        /* Matrix Canvas Background - делаем максимально ярким */
+        /* Matrix Canvas Background */
         #matrix-canvas {
             position: fixed;
             top: 0;
@@ -37,12 +37,12 @@
             pointer-events: none;
         }
 
-        /* Легкая полупрозрачная вуаль только под терминалом, чтобы текст читался, а матрица вокруг сияла */
+        /* Затемнение под терминалом для читаемости текста */
         body::after {
             content: "";
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.25);
+            background: rgba(0, 0, 0, 0.35);
             z-index: -1;
             pointer-events: none;
         }
@@ -57,21 +57,22 @@
             pointer-events: none;
         }
 
-        /* Увеличиваем размер окна терминала */
+        /* Терминал с плавными тенями и адаптивностью */
         .terminal-container {
             width: 100%;
-            max-width: 1250px;
-            background: rgba(2, 8, 4, 0.88);
+            max-width: 1300px;
+            background: rgba(2, 8, 4, 0.9);
             border: 1px solid #00ff66;
-            box-shadow: 0 0 50px rgba(0, 255, 102, 0.45), inset 0 0 30px rgba(0, 255, 102, 0.1);
+            box-shadow: 0 0 50px rgba(0, 255, 102, 0.4), inset 0 0 30px rgba(0, 255, 102, 0.08);
             border-radius: 8px;
             overflow: hidden;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .terminal-header {
             background: #0b1c12;
-            padding: 14px 22px;
+            padding: 12px 20px;
             border-bottom: 1px solid #00ff66;
             display: flex;
             align-items: center;
@@ -93,7 +94,7 @@
         .btn-green { background: #27c93f; }
 
         .terminal-title {
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: #00ff66;
             letter-spacing: 1.5px;
             text-shadow: 0 0 8px rgba(0,255,102,0.6);
@@ -102,8 +103,8 @@
         /* Navigation Bar */
         .nav-bar {
             display: flex;
-            gap: 12px;
-            padding: 16px 30px;
+            gap: 10px;
+            padding: 14px 25px;
             border-bottom: 1px dashed rgba(0, 255, 102, 0.35);
             background: rgba(0, 255, 102, 0.04);
             flex-wrap: wrap;
@@ -112,13 +113,13 @@
         .nav-link {
             color: #00ff66;
             text-decoration: none;
-            padding: 8px 18px;
+            padding: 8px 16px;
             border: 1px solid rgba(0, 255, 102, 0.3);
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.95rem;
             background: rgba(0,0,0,0.4);
-            border-radius: 3px;
+            border-radius: 4px;
         }
 
         .nav-link:hover, .nav-link.active {
@@ -127,45 +128,46 @@
             box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
             color: #fff;
             text-shadow: 0 0 6px #00ff66;
+            transform: translateY(-2px);
         }
 
         .content-section {
             display: none;
-            padding: 45px 50px;
-            animation: fadeIn 0.35s ease-in-out;
+            padding: 40px 45px;
+            animation: fadeInScale 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         .content-section.active {
             display: block;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Плавная анимация переключения вкладок */
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.98) translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
         }
 
         .hero-grid {
             display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 45px;
+            grid-template-columns: 260px 1fr;
+            gap: 40px;
             align-items: center;
         }
 
-        @media (max-width: 900px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-        }
-
-        /* Увеличиваем аватарку под новый размер окна */
+        /* Аватарка */
         .avatar-box {
-            width: 240px;
-            height: 240px;
+            width: 220px;
+            height: 220px;
             border: 2px solid #00ff66;
             border-radius: 50%;
             overflow: hidden;
-            box-shadow: 0 0 30px rgba(0, 255, 102, 0.6), inset 0 0 15px rgba(0, 255, 102, 0.25);
+            box-shadow: 0 0 30px rgba(0, 255, 102, 0.5), inset 0 0 15px rgba(0, 255, 102, 0.2);
             margin: 0 auto;
             position: relative;
             background: #050a07;
@@ -173,12 +175,17 @@
             align-items: center;
             justify-content: center;
             animation: pulseGlow 3s infinite alternate;
+            transition: transform 0.4s ease;
+        }
+
+        .avatar-box:hover {
+            transform: scale(1.03);
         }
 
         .avatar-box::after {
             content: "KASPER_I";
             position: absolute;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: rgba(0, 255, 102, 0.4);
             letter-spacing: 2px;
             z-index: 0;
@@ -186,7 +193,7 @@
 
         @keyframes pulseGlow {
             0% { box-shadow: 0 0 20px rgba(0, 255, 102, 0.4); }
-            100% { box-shadow: 0 0 35px rgba(0, 255, 102, 0.8), inset 0 0 15px rgba(0, 255, 102, 0.5); }
+            100% { box-shadow: 0 0 35px rgba(0, 255, 102, 0.75), inset 0 0 15px rgba(0, 255, 102, 0.4); }
         }
 
         .avatar-box img {
@@ -196,58 +203,58 @@
             position: relative;
             z-index: 1;
             filter: contrast(110%) saturate(100%);
-            transition: transform 0.5s ease;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .avatar-box:hover img {
-            transform: scale(1.06);
+            transform: scale(1.08);
         }
 
         .glitch {
-            font-size: 2.6rem;
+            font-size: 2.4rem;
             font-weight: bold;
             color: #00ff66;
             position: relative;
             text-shadow: 0 0 12px rgba(0,255,102,0.8);
-            margin-bottom: 12px;
-            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
         }
 
         .status-line {
             color: #00e5ff;
-            margin-bottom: 20px;
-            font-size: 1.1rem;
+            margin-bottom: 18px;
+            font-size: 1.05rem;
             text-shadow: 0 0 6px rgba(0,229,255,0.5);
         }
 
         .bio-text {
             line-height: 1.7;
             color: #d0d0d0;
-            margin-bottom: 25px;
-            font-size: 1.05rem;
+            margin-bottom: 22px;
+            font-size: 1rem;
         }
 
         .section-title {
-            font-size: 1.5rem;
-            margin-bottom: 25px;
+            font-size: 1.4rem;
+            margin-bottom: 22px;
             color: #00ff66;
             border-bottom: 1px solid rgba(0, 255, 102, 0.4);
-            padding-bottom: 10px;
+            padding-bottom: 8px;
             letter-spacing: 1.2px;
-            text-shadow: 0 0 8px rgba(0,255,102,0.4);
+            text-shadow: 0 0 6px rgba(0,255,102,0.4);
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 20px;
         }
 
         .service-card {
             border: 1px solid rgba(0, 255, 102, 0.35);
-            padding: 25px;
+            padding: 22px;
             background: rgba(0, 255, 102, 0.03);
-            transition: all 0.3s ease;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
             border-radius: 5px;
             position: relative;
             overflow: hidden;
@@ -265,7 +272,7 @@
         .service-card:hover {
             border-color: #00ff66;
             box-shadow: 0 0 20px rgba(0, 255, 102, 0.25);
-            transform: translateY(-3px);
+            transform: translateY(-4px);
             background: rgba(0, 255, 102, 0.06);
         }
 
@@ -276,29 +283,29 @@
 
         .service-title {
             color: #00ff66;
-            font-size: 1.25rem;
-            margin-bottom: 12px;
+            font-size: 1.15rem;
+            margin-bottom: 10px;
             text-shadow: 0 0 5px rgba(0,255,102,0.3);
         }
 
         .service-desc {
             color: #bbb;
-            font-size: 0.98rem;
+            font-size: 0.95rem;
             line-height: 1.6;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .action-btn {
             display: inline-block;
             color: #00e5ff;
             border: 1px solid #00e5ff;
-            padding: 9px 18px;
+            padding: 8px 16px;
             text-decoration: none;
-            font-size: 0.92rem;
-            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             background: rgba(0, 229, 255, 0.05);
             cursor: pointer;
-            border-radius: 3px;
+            border-radius: 4px;
         }
 
         .action-btn:hover {
@@ -306,35 +313,36 @@
             box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
             color: #fff;
             text-shadow: 0 0 6px #00e5ff;
+            transform: translateY(-2px);
         }
 
         .links-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 15px;
-            margin-top: 25px;
+            margin-top: 20px;
         }
 
         .terminal-footer {
             text-align: center;
             color: #666;
-            font-size: 0.88rem;
-            padding: 15px;
+            font-size: 0.85rem;
+            padding: 14px;
             border-top: 1px solid rgba(0, 255, 102, 0.1);
             background: rgba(2, 5, 3, 0.7);
         }
 
         .prompt {
             color: #00e5ff;
-            margin-top: 25px;
-            font-size: 1rem;
+            margin-top: 22px;
+            font-size: 0.95rem;
             text-shadow: 0 0 5px rgba(0,229,255,0.3);
         }
 
         .cursor {
             display: inline-block;
-            width: 10px;
-            height: 18px;
+            width: 9px;
+            height: 17px;
             background: #00ff66;
             vertical-align: middle;
             animation: blink 1s infinite;
@@ -343,6 +351,55 @@
         @keyframes blink {
             0%, 50% { opacity: 1; }
             51%, 100% { opacity: 0; }
+        }
+
+        /* --- МОБИЛЬНАЯ АДАПТАЦИЯ (MEDIA QUERIES) --- */
+        @media (max-width: 900px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 25px;
+            }
+            .content-section {
+                padding: 25px 20px;
+            }
+            .glitch {
+                font-size: 1.9rem;
+            }
+            .terminal-container {
+                border-radius: 4px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 5px;
+            }
+            .nav-bar {
+                padding: 10px;
+                gap: 6px;
+                justify-content: center;
+            }
+            .nav-link {
+                padding: 6px 10px;
+                font-size: 0.85rem;
+            }
+            .avatar-box {
+                width: 170px;
+                height: 170px;
+            }
+            .glitch {
+                font-size: 1.5rem;
+            }
+            .status-line {
+                font-size: 0.9rem;
+            }
+            .bio-text {
+                font-size: 0.9rem;
+            }
+            .section-title {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
@@ -466,7 +523,7 @@
             event.currentTarget.classList.add('active');
         }
 
-        // Matrix Rain Background Animation (медленный шлейф для яркой и заметной матрицы)
+        // Matrix Rain Background Animation
         const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
 
@@ -487,7 +544,6 @@
         }
 
         function drawMatrix() {
-            // Прозрачность 0.08 делает шлейф длинным и ярким, матрица горит сочно
             ctx.fillStyle = 'rgba(0, 2, 1, 0.08)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
