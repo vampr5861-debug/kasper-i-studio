@@ -240,7 +240,7 @@ body {
     background: rgba(0, 243, 255, 0.1);
     border: 1px solid var(--neon-cyan);
     color: var(--neon-cyan);
-    font-size: 0.8rem;
+    font-size: 0.80rem;
     border-radius: 4px;
 }
 
