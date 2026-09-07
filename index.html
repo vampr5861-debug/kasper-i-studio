@@ -37,7 +37,6 @@
             pointer-events: none;
         }
 
-        /* Затемнение под терминалом для читаемости текста */
         body::after {
             content: "";
             position: fixed;
@@ -47,7 +46,6 @@
             pointer-events: none;
         }
 
-        /* Scanline effect */
         .scanlines {
             position: fixed;
             top: 0; left: 0; bottom: 0; right: 0;
@@ -57,7 +55,6 @@
             pointer-events: none;
         }
 
-        /* Терминал с плавными тенями и адаптивностью */
         .terminal-container {
             width: 100%;
             max-width: 1300px;
@@ -100,7 +97,6 @@
             text-shadow: 0 0 8px rgba(0,255,102,0.6);
         }
 
-        /* Navigation Bar */
         .nav-bar {
             display: flex;
             gap: 10px;
@@ -141,7 +137,6 @@
             display: block;
         }
 
-        /* Плавная анимация переключения вкладок */
         @keyframes fadeInScale {
             from {
                 opacity: 0;
@@ -160,7 +155,6 @@
             align-items: center;
         }
 
-        /* Аватарка */
         .avatar-box {
             width: 220px;
             height: 220px;
@@ -306,6 +300,7 @@
             background: rgba(0, 229, 255, 0.05);
             cursor: pointer;
             border-radius: 4px;
+            text-align: center;
         }
 
         .action-btn:hover {
@@ -316,9 +311,10 @@
             transform: translateY(-2px);
         }
 
+        /* Сетка контактов под все ссылки */
         .links-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 15px;
             margin-top: 20px;
         }
@@ -353,7 +349,6 @@
             51%, 100% { opacity: 0; }
         }
 
-        /* --- МОБИЛЬНАЯ АДАПТАЦИЯ (MEDIA QUERIES) --- */
         @media (max-width: 900px) {
             .hero-grid {
                 grid-template-columns: 1fr;
@@ -366,40 +361,14 @@
             .glitch {
                 font-size: 1.9rem;
             }
-            .terminal-container {
-                border-radius: 4px;
-            }
         }
 
         @media (max-width: 600px) {
-            body {
-                padding: 5px;
-            }
-            .nav-bar {
-                padding: 10px;
-                gap: 6px;
-                justify-content: center;
-            }
-            .nav-link {
-                padding: 6px 10px;
-                font-size: 0.85rem;
-            }
-            .avatar-box {
-                width: 170px;
-                height: 170px;
-            }
-            .glitch {
-                font-size: 1.5rem;
-            }
-            .status-line {
-                font-size: 0.9rem;
-            }
-            .bio-text {
-                font-size: 0.9rem;
-            }
-            .section-title {
-                font-size: 1.2rem;
-            }
+            body { padding: 5px; }
+            .nav-bar { padding: 10px; gap: 6px; justify-content: center; }
+            .nav-link { padding: 6px 10px; font-size: 0.85rem; }
+            .avatar-box { width: 170px; height: 170px; }
+            .glitch { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -465,12 +434,12 @@
                 <div class="service-card">
                     <div class="service-title">Аппаратный и софтовый ремонт</div>
                     <div class="service-desc">Диагностика неполадок железа, оптимизация оперативных систем, тонкие настройки под ключ.</div>
-                    <a href="https://boosty.to" target="_blank" class="action-btn">BOOSTY (Подписаться)</a>
+                    <a href="https://boosty.to/kasper_i" target="_blank" class="action-btn">BOOSTY (Подписаться)</a>
                 </div>
                 <div class="service-card">
                     <div class="service-title">Удаленная помощь (AnyDesk)</div>
                     <div class="service-desc">Индивидуальный коннект и оперативное решение ваших проблем за определенный тир подписки.</div>
-                    <a href="https://t.me" target="_blank" class="action-btn">TELEGRAM ACCESS</a>
+                    <a href="https://t.me/KasPer_IS" target="_blank" class="action-btn">TELEGRAM ACCESS</a>
                 </div>
             </div>
             <div class="prompt">root@kasper:~# execution pipeline active.<span class="cursor"></span></div>
@@ -489,7 +458,7 @@
                 <div class="service-card">
                     <div class="service-title">Видеоматериалы</div>
                     <div class="service-desc">Стримы, распаковки железа, честные тесты без купюр и рекламы хлама.</div>
-                    <a href="https://youtube.com" target="_blank" class="action-btn">YOUTUBE / RUTUBE</a>
+                    <a href="https://rutube.ru/channel/23637250" target="_blank" class="action-btn">RUTUBE CHANNEL</a>
                 </div>
             </div>
             <div class="prompt">root@kasper:~# mounting archive storage...<span class="cursor"></span></div>
@@ -500,17 +469,23 @@
             <div class="section-title">04 // КАНАЛЫ СВЯЗИ & ШЛЮЗЫ</div>
             <p class="bio-text">Точки прямого подключения к сети:</p>
             <div class="links-grid">
-                <a href="https://t.me" target="_blank" class="action-btn" style="text-align: center;">TELEGRAM</a>
-                <a href="https://boosty.to" target="_blank" class="action-btn" style="text-align: center;">BOOSTY</a>
-                <a href="https://youtube.com" target="_blank" class="action-btn" style="text-align: center;">YOUTUBE</a>
-                <a href="https://rutube.ru" target="_blank" class="action-btn" style="text-align: center;">RUTUBE</a>
-                <a href="https://github.com" target="_blank" class="action-btn" style="text-align: center;">GITHUB</a>
+                <a href="https://boosty.to/kasper_i" target="_blank" class="action-btn">⚡ BOOSTY</a>
+                <a href="https://t.me/KasPer_IS" target="_blank" class="action-btn">💬 ТГ Личный</a>
+                <a href="https://t.me/KasPerKik" target="_blank" class="action-btn">📢 Telegram Канал</a>
+                <a href="https://t.me/vpadikeKaspera" target="_blank" class="action-btn">👥 Чат в телеги</a>
+                <a href="https://rutube.ru/channel/23637250" target="_blank" class="action-btn">📼 RUTUBE</a>
+                <a href="https://vkplay.live/kasper_i" target="_blank" class="action-btn">🎮 VK Play Стримы</a>
+                <a href="https://www.donationalerts.com/r/kasper_i" target="_blank" class="action-btn">💰 DonatAlerts</a>
+                <a href="https://vk.com/kasper_gaming" target="_blank" class="action-btn">🌐 Паблик ВК</a>
+                <a href="https://vk.com/kasper_i" target="_blank" class="action-btn">👤 Страница ВК</a>
+                <a href="https://instagram.com/kasper_strimer" target="_blank" class="action-btn">📸 Инстаграм</a>
+                <a href="https://max.ru/channel/kasper" target="_blank" class="action-btn">🌐 MAX</a>
             </div>
             <div class="prompt">root@kasper:~# connection secure and encrypted.<span class="cursor"></span></div>
         </div>
 
         <div class="terminal-footer">
-            © 2026 Kasper I Studio. All rights reserved. // Terminal Protocol v4.5.0
+            © 2026 Kasper I Studio. All rights reserved. // Terminal Protocol v4.5.8
         </div>
     </div>
 
@@ -523,7 +498,6 @@
             event.currentTarget.classList.add('active');
         }
 
-        // Matrix Rain Background Animation
         const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
 
