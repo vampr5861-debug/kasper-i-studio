@@ -1,23 +1,22 @@
 :root {
-    --bg-color: #0b0f0e;
-    --card-bg: rgba(14, 22, 19, 0.75);
+    --bg: #030706;
+    --panel: rgba(3, 10, 8, 0.88);
     --neon-green: #00ff66;
-    --neon-cyan: #00e5ff;
-    --text-main: #c0d8d0;
-    --text-bright: #ffffff;
-    --border-color: rgba(0, 255, 102, 0.25);
-    --glow-shadow: 0 0 15px rgba(0, 255, 102, 0.15);
+    --neon-cyan: #00f3ff;
+    --text: #a8c4bc;
+    --border: rgba(0, 255, 102, 0.35);
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    background-color: var(--bg-color);
-    color: var(--text-main);
+    background-color: var(--bg);
+    /* Фоновая картинка на весь сайт в стиле андеграунд-киберпанка с затемнением */
+    background-image: linear-gradient(rgba(3, 7, 6, 0.85), rgba(3, 7, 6, 0.92)), url('avatar.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--text);
     font-family: 'Courier New', Courier, monospace;
     min-height: 100vh;
     display: flex;
@@ -28,50 +27,95 @@ body {
     overflow-x: hidden;
 }
 
+/* Эффект старого ЭЛТ-монитора (сканлайны) */
 .scanlines {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
-    background-size: 100% 4px;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.35) 50%);
+    background-size: 100% 3px;
     z-index: 999;
     pointer-events: none;
-    opacity: 0.6;
 }
 
-.vignette {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.9);
-    z-index: 998;
-    pointer-events: none;
-}
-
-.hero {
+/* Шапка-терминал */
+.site-header {
     width: 100%;
-    max-width: 800px;
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 30px;
-    margin-bottom: 20px;
-    box-shadow: var(--glow-shadow);
-    backdrop-filter: blur(10px);
+    max-width: 900px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 25px;
+    box-shadow: 0 0 20px rgba(0, 255, 102, 0.15);
+    backdrop-filter: blur(8px);
 }
 
-.hero-container {
+.terminal-bar {
+    background: rgba(0, 255, 102, 0.08);
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.85rem;
+    color: var(--neon-green);
+}
+
+.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.dot.red { background: #ff5f56; }
+.dot.yellow { background: #ffbd2e; }
+.dot.green { background: #27c93f; }
+
+.nav-links {
+    padding: 12px 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: 0.2s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--neon-green);
+    text-shadow: 0 0 8px var(--neon-green);
+}
+
+/* Основной контейнер */
+.main-container {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.hero-box, .terminal-panel, .service-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 30px;
+    box-shadow: 0 0 15px rgba(0, 255, 102, 0.1);
+    backdrop-filter: blur(8px);
+}
+
+.hero-box {
     display: flex;
     align-items: center;
     gap: 25px;
 }
 
-.avatar-box {
-    flex-shrink: 0;
+/* Аватарка из картинки */
+.avatar-frame {
     width: 110px;
     height: 110px;
-    border-radius: 50%;
     border: 2px solid var(--neon-green);
+    border-radius: 50%;
     overflow: hidden;
-    box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+    box-shadow: 0 0 20px rgba(0, 255, 102, 0.4);
+    flex-shrink: 0;
 }
 
 .avatar-img {
@@ -80,176 +124,102 @@ body {
     object-fit: cover;
 }
 
-.hero-text {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
 .glitch {
-    position: relative;
-    font-size: 2rem;
+    font-size: 1.8rem;
+    color: #fff;
     font-weight: bold;
-    color: var(--text-bright);
-    letter-spacing: 2px;
+    margin-bottom: 5px;
+    text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
 }
 
-.glitch::before, .glitch::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-}
-
-.glitch::before {
-    left: 2px;
-    text-shadow: -2px 0 var(--neon-cyan);
-    clip: rect(24px, 550px, 90px, 0);
-    animation: glitch-anim 3s infinite linear alternate-reverse;
-}
-
-.glitch::after {
-    left: -2px;
-    text-shadow: -2px 0 var(--neon-green);
-    clip: rect(85px, 550px, 140px, 0);
-    animation: glitch-anim2 2.5s infinite linear alternate-reverse;
-}
-
-.glitch-small {
-    position: relative;
-    display: inline-block;
-    color: var(--neon-green);
-}
-
-.subtitle {
-    font-size: 1rem;
-    color: var(--text-bright);
-}
-
-.highlight {
-    color: var(--neon-green);
-    font-weight: bold;
-}
-
-.tagline {
-    font-size: 0.9rem;
-    color: #8fa8a0;
-}
-
-.content {
-    width: 100%;
-    max-width: 800px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.card {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 25px;
-    box-shadow: var(--glow-shadow);
-    backdrop-filter: blur(10px);
-}
-
-.card h2 {
-    font-size: 1.2rem;
-    margin-bottom: 15px;
-    color: var(--neon-green);
-    letter-spacing: 1px;
-}
-
-.card p {
-    line-height: 1.6;
-    margin-bottom: 12px;
-    font-size: 0.95rem;
-}
-
-.signature {
+.sys-status {
+    font-size: 0.85rem;
     color: var(--neon-cyan);
-    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.blink { animation: blink 1s infinite; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+.bio {
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Сетка кнопок и услуг */
+.grid-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
     margin-top: 15px;
 }
 
-.emoji-fix {
-    font-style: normal;
-}
-
-.services-list {
-    list-style: none;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-}
-
-.services-list li {
-    background: rgba(0, 255, 102, 0.05);
-    border: 1px solid rgba(0, 255, 102, 0.1);
-    padding: 10px 15px;
-    border-radius: 4px;
-    font-size: 0.9rem;
-}
-
-.links-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-}
-
-.cyber-btn {
+.hacker-btn {
     display: block;
     text-align: center;
     padding: 12px;
-    background: transparent;
+    background: rgba(0, 255, 102, 0.03);
     border: 1px solid var(--neon-green);
     color: var(--neon-green);
     text-decoration: none;
     border-radius: 4px;
     font-weight: bold;
-    transition: all 0.3s ease;
-    box-shadow: inset 0 0 5px rgba(0, 255, 102, 0.1);
+    transition: all 0.3s;
 }
 
-.cyber-btn:hover {
+.hacker-btn:hover {
     background: var(--neon-green);
-    color: var(--bg-color);
+    color: var(--bg);
     box-shadow: 0 0 15px var(--neon-green);
 }
 
-footer {
-    margin-top: 30px;
+.highlight-btn {
+    border-color: var(--neon-cyan);
+    color: var(--neon-cyan);
+}
+.highlight-btn:hover {
+    background: var(--neon-cyan);
+    box-shadow: 0 0 15px var(--neon-cyan);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.service-card h3 {
+    color: var(--neon-green);
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.service-card p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: 15px;
+}
+
+.price-tag {
+    display: inline-block;
+    padding: 4px 8px;
+    background: rgba(0, 243, 255, 0.1);
+    border: 1px solid var(--neon-cyan);
+    color: var(--neon-cyan);
     font-size: 0.8rem;
-    color: #557065;
+    border-radius: 3px;
+}
+
+footer {
+    margin-top: 35px;
+    font-size: 0.75rem;
+    color: #557c6e;
     text-align: center;
 }
 
-@keyframes glitch-anim {
-    0% { clip: rect(15px, 9999px, 40px, 0); }
-    20% { clip: rect(60px, 9999px, 85px, 0); }
-    40% { clip: rect(10px, 9999px, 50px, 0); }
-    60% { clip: rect(70px, 9999px, 95px, 0); }
-    80% { clip: rect(30px, 9999px, 65px, 0); }
-    100% { clip: rect(50px, 9999px, 80px, 0); }
-}
-
-@keyframes glitch-anim2 {
-    0% { clip: rect(40px, 9999px, 70px, 0); }
-    20% { clip: rect(10px, 9999px, 30px, 0); }
-    40% { clip: rect(80px, 9999px, 100px, 0); }
-    60% { clip: rect(25px, 9999px, 55px, 0); }
-    80% { clip: rect(65px, 9999px, 90px, 0); }
-    100% { clip: rect(5px, 9999px, 35px, 0); }
-}
-
-@media (max-width: 600px) {
-    .hero-container {
+@media(max-width: 700px) {
+    .hero-box, .grid-buttons, .services-grid {
         flex-direction: column;
-        text-align: center;
-    }
-    .services-list, .links-grid {
         grid-template-columns: 1fr;
-    }
-    .glitch {
-        font-size: 1.5rem;
     }
 }
