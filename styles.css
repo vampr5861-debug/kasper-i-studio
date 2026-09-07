@@ -1,22 +1,27 @@
 :root {
-    --bg: #030706;
-    --panel: rgba(3, 10, 8, 0.88);
+    --bg-dark: #030706;
+    --panel-bg: rgba(4, 15, 11, 0.88);
     --neon-green: #00ff66;
     --neon-cyan: #00f3ff;
-    --text: #a8c4bc;
-    --border: rgba(0, 255, 102, 0.35);
+    --text-main: #b8d8cc;
+    --text-bright: #ffffff;
+    --border-glow: rgba(0, 255, 102, 0.3);
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 body {
-    background-color: var(--bg);
-    /* Фоновая картинка на весь сайт в стиле андеграунд-киберпанка с затемнением */
-    background-image: linear-gradient(rgba(3, 7, 6, 0.85), rgba(3, 7, 6, 0.92)), url('avatar.jpg');
+    background-color: var(--bg-dark);
+    /* Андеграундный фон на основе нашей картинки с затемнением и размытием */
+    background-image: linear-gradient(rgba(3, 7, 6, 0.88), rgba(3, 7, 6, 0.95)), url('avatar.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    color: var(--text);
+    color: var(--text-main);
     font-family: 'Courier New', Courier, monospace;
     min-height: 100vh;
     display: flex;
@@ -27,7 +32,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Эффект старого ЭЛТ-монитора (сканлайны) */
+/* Эффект ЭЛТ-монитора (сканлайны) */
 .scanlines {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -37,25 +42,25 @@ body {
     pointer-events: none;
 }
 
-/* Шапка-терминал */
-.site-header {
+/* Шапка терминала */
+.terminal-header {
     width: 100%;
     max-width: 900px;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 6px;
+    background: var(--panel-bg);
+    border: 1px solid var(--border-glow);
+    border-radius: 8px;
     margin-bottom: 25px;
     box-shadow: 0 0 20px rgba(0, 255, 102, 0.15);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(10px);
 }
 
 .terminal-bar {
     background: rgba(0, 255, 102, 0.08);
-    padding: 8px 12px;
+    padding: 10px 15px;
     display: flex;
     align-items: center;
     gap: 8px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--border-glow);
     font-size: 0.85rem;
     color: var(--neon-green);
 }
@@ -65,26 +70,35 @@ body {
 .dot.yellow { background: #ffbd2e; }
 .dot.green { background: #27c93f; }
 
-.nav-links {
-    padding: 12px 20px;
+.nav-menu {
     display: flex;
-    gap: 20px;
+    gap: 15px;
+    padding: 12px 20px;
+    flex-wrap: wrap;
 }
 
-.nav-links a {
-    color: var(--text);
-    text-decoration: none;
+.nav-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--text-main);
+    font-family: 'Courier New', Courier, monospace;
     font-size: 0.9rem;
-    transition: 0.2s;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    text-decoration: none;
 }
 
-.nav-links a:hover, .nav-links a.active {
+.nav-btn:hover, .nav-btn.active {
+    border-color: var(--neon-green);
     color: var(--neon-green);
-    text-shadow: 0 0 8px var(--neon-green);
+    background: rgba(0, 255, 102, 0.05);
+    box-shadow: 0 0 10px rgba(0, 255, 102, 0.2);
 }
 
-/* Основной контейнер */
-.main-container {
+/* Контейнер контента */
+.container {
     width: 100%;
     max-width: 900px;
     display: flex;
@@ -92,30 +106,42 @@ body {
     gap: 20px;
 }
 
-.hero-box, .terminal-panel, .service-card {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 6px;
+.card {
+    background: var(--panel-bg);
+    border: 1px solid var(--border-glow);
+    border-radius: 8px;
     padding: 30px;
-    box-shadow: 0 0 15px rgba(0, 255, 102, 0.1);
-    backdrop-filter: blur(8px);
+    box-shadow: 0 0 15px rgba(0, 255, 102, 0.08);
+    backdrop-filter: blur(10px);
+    display: none;
 }
 
-.hero-box {
+.card.active-tab {
+    display: block;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Главный блок (Hero) */
+.hero-flex {
     display: flex;
     align-items: center;
     gap: 25px;
 }
 
-/* Аватарка из картинки */
 .avatar-frame {
-    width: 110px;
-    height: 110px;
-    border: 2px solid var(--neon-green);
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
+    border: 2px solid var(--neon-green);
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 255, 102, 0.4);
     flex-shrink: 0;
+    background: #000;
 }
 
 .avatar-img {
@@ -124,12 +150,11 @@ body {
     object-fit: cover;
 }
 
-.glitch {
+.hero-info h1 {
     font-size: 1.8rem;
-    color: #fff;
-    font-weight: bold;
-    margin-bottom: 5px;
-    text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+    color: var(--text-bright);
+    margin-bottom: 6px;
+    text-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
 }
 
 .sys-status {
@@ -141,84 +166,100 @@ body {
 .blink { animation: blink 1s infinite; }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-.bio {
+.bio-text {
     font-size: 0.95rem;
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
-/* Сетка кнопок и услуг */
-.grid-buttons {
+/* Секции заголовков */
+.section-title {
+    color: var(--neon-green);
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.desc-text {
+    line-height: 1.6;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+}
+
+.signature {
+    color: var(--neon-cyan);
+    font-weight: bold;
+    margin-top: 15px;
+    display: inline-block;
+}
+
+/* Сетки для кнопок и услуг */
+.grid-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
     margin-top: 15px;
 }
 
-.hacker-btn {
+.cyber-link {
     display: block;
     text-align: center;
-    padding: 12px;
+    padding: 14px;
     background: rgba(0, 255, 102, 0.03);
     border: 1px solid var(--neon-green);
     color: var(--neon-green);
     text-decoration: none;
-    border-radius: 4px;
+    border-radius: 6px;
     font-weight: bold;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
 }
 
-.hacker-btn:hover {
+.cyber-link:hover {
     background: var(--neon-green);
-    color: var(--bg);
+    color: var(--bg-dark);
     box-shadow: 0 0 15px var(--neon-green);
 }
 
-.highlight-btn {
-    border-color: var(--neon-cyan);
-    color: var(--neon-cyan);
-}
-.highlight-btn:hover {
-    background: var(--neon-cyan);
-    box-shadow: 0 0 15px var(--neon-cyan);
-}
-
-.services-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+.service-box {
+    background: rgba(0, 255, 102, 0.02);
+    border: 1px solid rgba(0, 255, 102, 0.15);
+    padding: 20px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.service-card h3 {
+.service-box h3 {
     color: var(--neon-green);
-    font-size: 1.1rem;
-    margin-bottom: 10px;
+    font-size: 1.05rem;
+    margin-bottom: 8px;
 }
 
-.service-card p {
+.service-box p {
     font-size: 0.9rem;
     line-height: 1.4;
     margin-bottom: 15px;
 }
 
-.price-tag {
-    display: inline-block;
+.price-badge {
+    align-self: flex-start;
     padding: 4px 8px;
     background: rgba(0, 243, 255, 0.1);
     border: 1px solid var(--neon-cyan);
     color: var(--neon-cyan);
     font-size: 0.8rem;
-    border-radius: 3px;
+    border-radius: 4px;
 }
 
 footer {
     margin-top: 35px;
     font-size: 0.75rem;
-    color: #557c6e;
+    color: #4a6b5e;
     text-align: center;
 }
 
 @media(max-width: 700px) {
-    .hero-box, .grid-buttons, .services-grid {
+    .hero-flex, .grid-2 {
         flex-direction: column;
         grid-template-columns: 1fr;
     }
